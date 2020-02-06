@@ -43,9 +43,9 @@ class User extends CI_Controller
             $name = $this->input->post('name');
             $email = $this->input->post('email');
 
-            $this->set('name', $name);
+            $this->db->set('name', $name);
             $this->db->where('email', $email);
-            $this->db->updates('user');
+            $this->db->update('user');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Your profile has been updated</div>');

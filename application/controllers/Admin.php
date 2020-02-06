@@ -22,6 +22,23 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function detail()
+    {
+
+        $data['title'] = 'Detail User';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $this->db->order_by('name','asc');
+        $data['User'] = $this->db->get_where('user',['role_id' => 2])->result_array();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function role()
     {
         # code...
@@ -65,7 +82,7 @@ class Admin extends CI_Controller
 
         $data = [
             'role_id' => $role_id,
-            'menu_id' => $menu_id  
+            'menu_id' => $menu_id
 
         ];
 
@@ -76,7 +93,7 @@ class Admin extends CI_Controller
             $this->db->insert('user_access_menu', $data);
         } else {
             $this->db->delete('user_access_menu', $data);
-        } 
+        }
 
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
