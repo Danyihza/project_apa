@@ -28,8 +28,8 @@ class Admin extends CI_Controller
         $data['title'] = 'Detail User';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-        $this->db->order_by('name','asc');
-        $data['User'] = $this->db->get_where('user',['role_id' => 2])->result_array();
+        $this->db->order_by('name', 'asc');
+        $data['User'] = $this->db->get_where('user', ['role_id' => 2])->result_array();
 
 
         $this->load->view('templates/header', $data);
@@ -37,6 +37,22 @@ class Admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function delete($id)
+    {
+        # code...
+        $this->db->where('id', $id);
+        $this->db->delete('user');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Data has been deleted</div>');
+        redirect('admin/detail');
+    }
+
+    public function edit($id)
+    {
+        # code...
+        
     }
 
     public function role()
@@ -54,6 +70,7 @@ class Admin extends CI_Controller
         $this->load->view('admin/role', $data);
         $this->load->view('templates/footer');
     }
+
     public function roleAccess($role_id)
     {
         # code...
