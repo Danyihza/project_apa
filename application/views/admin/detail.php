@@ -57,7 +57,10 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="role" name="role" placeholder="Role Name">
+                                <input type="text" class="form-control" id="role" name="role" placeholder="Email" readonly>
                             </div>
+                                
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
