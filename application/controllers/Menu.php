@@ -31,10 +31,20 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            $this->session->set_flashdata('message', '<div class="alert a1lert-success" role="alert">
                     New Menu Added!</div>');
             redirect('menu');
         }
+    }
+
+    public function deleteMenu($id)
+    {
+        # code...
+        $this->db->where('id', $id);
+        $this->db->delete('user_menu');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Menu has been deleted</div>');
+        redirect('menu');
     }
 
     public function submenu()
@@ -51,9 +61,9 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('menu_id', 'Menu', 'required');
         $this->form_validation->set_rules('url', 'URL', 'required');
-        $this->form_validation->set_rules('icon', 'Icon', 'required');        
+        $this->form_validation->set_rules('icon', 'Icon', 'required');
 
-        
+
         if ($this->form_validation->run() == false) {
             # code...
             $this->load->view('templates/header', $data);

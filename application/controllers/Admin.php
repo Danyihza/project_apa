@@ -14,7 +14,33 @@ class Admin extends CI_Controller
         $data['title'] = 'Dashboard';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+        
+        // $query = $this->db->query("SELECT * FROM user WHERE pilihan1='Ketua MPK' OR pilihan2='Ketua MPK'");
+        // $data['ketum'] = $query->num_rows();
+        $this->load->model('Jabatan_model', 'jabatan');
 
+        $data['ketum'] = $this->jabatan->getjabatan('Ketua MPK');
+        $data['waketum'] = $this->jabatan->getjabatan('Wakil Ketua MPK');
+        $data['benm'] = $this->jabatan->getjabatan('Bendahara MPK');
+        $data['sekm'] = $this->jabatan->getjabatan('Sekretaris MPK');
+        $data['koxi'] = $this->jabatan->getjabatan('Koordinator Kelas XI');
+        $data['kox'] = $this->jabatan->getjabatan('Koordinator Kelas X');
+        $data['ketos'] = $this->jabatan->getjabatan('Ketua Osis');
+        $data['waketos'] = $this->jabatan->getjabatan('Wakil Ketua Osis');
+        $data['sekos'] = $this->jabatan->getjabatan('Sekretaris Osis');
+        $data['benos'] = $this->jabatan->getjabatan('Bendahara Osis');
+        $data['sek1'] = $this->jabatan->getjabatan('Sekbid Ketaqwaan');
+        $data['sek2'] = $this->jabatan->getjabatan('Sekbid BPL-LH ');
+        $data['sek3'] = $this->jabatan->getjabatan('Sekbid Akademik');
+        $data['sek4'] = $this->jabatan->getjabatan('Sekbid Apresiasi dan Karya Seni');
+        $data['sek5'] = $this->jabatan->getjabatan('Sekbid Jasmani');
+        $data['sek6'] = $this->jabatan->getjabatan('Sekbid Jurnalistik');
+        $data['sek7'] = $this->jabatan->getjabatan('Sekbid Berbangsa');
+        $data['sek8'] = $this->jabatan->getjabatan('Sekbid Bela Negara');
+        $data['sek9'] = $this->jabatan->getjabatan('Sekbid Wirausaha');
+        $data['sek10'] = $this->jabatan->getjabatan('Sekbid Kerumahtanggaan');
+
+            
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -51,8 +77,8 @@ class Admin extends CI_Controller
 
     public function edit($id)
     {
-        # code...
         
+
     }
 
     public function role()

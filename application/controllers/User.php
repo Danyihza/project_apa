@@ -48,7 +48,7 @@ class User extends CI_Controller
 
             if ($upload_image) {
                 # code...                
-                $config['allowed_types'] = 'gif|jpg|jpeg|png';
+                $config['allowed_types'] = 'gif|jpg|jpeg|png|jfif';
                 $config['max_size'] = '5000';
                 $config['upload_path'] = './assets/img/profile/';
 
@@ -78,6 +78,7 @@ class User extends CI_Controller
             redirect('user');
         }
     }
+
 
     public function changePassword()
     {

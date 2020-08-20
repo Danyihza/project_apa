@@ -23,10 +23,11 @@
                             <th scope="row"><?php echo $i ?></th>
                             <td><?= $u['name']; ?></td>
                             <td><?= $u['email']; ?></td>
-                            <td><img src="<?= base_url('assets/img/profile/' . $u['image']); ?>" class="imguser mx-auto d-block"></td>
+                            <td><img src="<?= base_url('assets/img/profile/' . $u['image']); ?>" width="64"></td>
                             <td>
-                                <a class="badge badge-success" href="<?= base_url('admin/edit/') . $u['id'] ?>">Edit</a>
-                                <a class="badge badge-danger" href="<?= base_url('admin/delete/') . $u['id'] ?>">Delete</a>
+                                <a class="badge badge-success" href="#" data-target="#ModalEdit" data-toggle="modal">Edit</a>
+                                <!-- <a type="button" class="badge badge-warning" href="#" data-target="#ModalEdit" data-toggle="modal">Edit</a> -->
+                                <a class="badge badge-danger" href="<?= base_url('admin/delete/') . $u['id'] ?>" onclick="confirm('Apakah anda yakin menghapusnya ?')">Delete</a>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -44,7 +45,7 @@
         <!-- End of Main Content -->
 
         <!-- Modal -->
-        <div class="modal fade" id="newRoleModal" tabindex="-1" role="dialog" aria-labelledby="newRoleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="ModalEdit" name="ModalEdit" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -71,3 +72,5 @@
             </div>
         </div>
         <!-- End Of Modal -->
+
+        
