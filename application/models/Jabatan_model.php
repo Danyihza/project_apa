@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jabatan_model extends CI_Model
 {
-    public function getjabatan(String $nama)
+    public function getjabatan($nama)
     {
         # code...
         $query ="SELECT * FROM user WHERE role_id='2' AND pilihan1='$nama' OR pilihan2='$nama'";

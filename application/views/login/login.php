@@ -117,7 +117,7 @@
 
 	<script>
 		$('.login_button').on('click', function() {
-			$('.login_button').html('Please Wait...')
+			$('.login_button').html('Please Wait...')			
 		})
 	</script>
 

@@ -19,26 +19,26 @@ class Admin extends CI_Controller
         // $data['ketum'] = $query->num_rows();
         $this->load->model('Jabatan_model', 'jabatan');
 
-        $data['ketum'] = $this->jabatan->getjabatan('Ketua MPK');
-        $data['waketum'] = $this->jabatan->getjabatan('Wakil Ketua MPK');
-        $data['benm'] = $this->jabatan->getjabatan('Bendahara MPK');
-        $data['sekm'] = $this->jabatan->getjabatan('Sekretaris MPK');
-        $data['koxi'] = $this->jabatan->getjabatan('Koordinator Kelas XI');
-        $data['kox'] = $this->jabatan->getjabatan('Koordinator Kelas X');
-        $data['ketos'] = $this->jabatan->getjabatan('Ketua Osis');
-        $data['waketos'] = $this->jabatan->getjabatan('Wakil Ketua Osis');
-        $data['sekos'] = $this->jabatan->getjabatan('Sekretaris Osis');
-        $data['benos'] = $this->jabatan->getjabatan('Bendahara Osis');
-        $data['sek1'] = $this->jabatan->getjabatan('Sekbid Ketaqwaan');
-        $data['sek2'] = $this->jabatan->getjabatan('Sekbid BPL-LH ');
-        $data['sek3'] = $this->jabatan->getjabatan('Sekbid Akademik');
-        $data['sek4'] = $this->jabatan->getjabatan('Sekbid Apresiasi dan Karya Seni');
-        $data['sek5'] = $this->jabatan->getjabatan('Sekbid Jasmani');
-        $data['sek6'] = $this->jabatan->getjabatan('Sekbid Jurnalistik');
-        $data['sek7'] = $this->jabatan->getjabatan('Sekbid Berbangsa');
-        $data['sek8'] = $this->jabatan->getjabatan('Sekbid Bela Negara');
-        $data['sek9'] = $this->jabatan->getjabatan('Sekbid Wirausaha');
-        $data['sek10'] = $this->jabatan->getjabatan('Sekbid Kerumahtanggaan');
+        $data['ketum'] = $this->jabatan->getjabatan(1);
+        $data['waketum'] = $this->jabatan->getjabatan(2);
+        $data['benm'] = $this->jabatan->getjabatan(3);
+        $data['sekm'] = $this->jabatan->getjabatan(4);
+        $data['koxi'] = $this->jabatan->getjabatan(5);
+        $data['kox'] = $this->jabatan->getjabatan(6);
+        $data['ketos'] = $this->jabatan->getjabatan(7);
+        $data['waketos'] = $this->jabatan->getjabatan(8);
+        $data['sekos'] = $this->jabatan->getjabatan(9);
+        $data['benos'] = $this->jabatan->getjabatan(10);
+        $data['sek1'] = $this->jabatan->getjabatan(11);
+        $data['sek2'] = $this->jabatan->getjabatan(12);
+        $data['sek3'] = $this->jabatan->getjabatan(13);
+        $data['sek4'] = $this->jabatan->getjabatan(14);
+        $data['sek5'] = $this->jabatan->getjabatan(15);
+        $data['sek6'] = $this->jabatan->getjabatan(16);
+        $data['sek7'] = $this->jabatan->getjabatan(17);
+        $data['sek8'] = $this->jabatan->getjabatan(18);
+        $data['sek9'] = $this->jabatan->getjabatan(19);
+        $data['sek10'] = $this->jabatan->getjabatan(20);
 
             
         $this->load->view('templates/header', $data);
