@@ -42,18 +42,17 @@ class Auth extends CI_Controller
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
         if ($user) {
-            if ($user['is_active'] == 1) {
-                if (password_verify($pass, $user['password'])) {
-                    $data=[
-                        'email' => $user['email']
-                    ];
-                    $this->session->set_userdata($data);
-                    redirect('Landing');
-                }else{
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+
+            if (password_verify($pass, $user['password'])) {
+                $data = [
+                    'email' => $user['email']
+                ];
+                $this->session->set_userdata($data);
+                redirect('Landing');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                     Wrong Password!</div>');
-                    redirect(base_url());
-                }
+                redirect(base_url());
             }
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -147,7 +146,7 @@ class Auth extends CI_Controller
         } else {
             $setuju = $this->input->post('setuju');
             if (empty($setuju)) {
-                $this->session->set_flashdata('popup','popup');
+                $this->session->set_flashdata('popup', 'popup');
                 redirect('auth/registration');
             }
 

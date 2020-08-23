@@ -23,9 +23,9 @@
                         <tr>
                             <td class="text-center">
                                 <?php if ($u['is_active'] == 1) : ?>
-                                    <a class="btn btn-success" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Lolos</a>
-                                <?php else : ?>
                                     <a class="btn btn-danger" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Eliminasi</a>
+                                <?php else : ?>
+                                    <a class="btn btn-success" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Lolos</a>
                                 <?php endif; ?>
                             </td>
                             <td><?= $u['name']; ?></td>
@@ -124,10 +124,10 @@
                                             <li class="list-group-item">Kode Unik : <p class="badge badge-info mb-0"><?= $u['unique_code'] ?></p>
                                             </li>
                                             <?php if ($u['is_active'] == 1) : ?>
+                                                <li class="list-group-item list-group-item-danger">Keterangan : <b>Tidak Lolos</b></li>
+                                            <?php elseif ($u['is_active'] == 2) : ?>
                                                 <li class="list-group-item list-group-item-success">Keterangan : <b>Lolos</b></li>
-                                                <?php elseif ($u['is_active'] == 2) : ?>
-                                                    <li class="list-group-item list-group-item-danger">Keterangan : <b>Tidak Lolos</b></li>
-                                                    <?php endif; ?>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                 </div>

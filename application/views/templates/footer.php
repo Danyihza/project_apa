@@ -38,7 +38,9 @@
   </div>
 </div>
 
-<?php foreach ($User as $u) : ?>
+<?php 
+if ($User) {
+foreach ($User as $u) : ?>
   <!-- Status Modal -->
   <div class="modal fade" id="statusModal<?= $u['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -57,7 +59,9 @@
       </div>
     </div>
   </div>
-<?php endforeach; ?>
+<?php endforeach; 
+}
+?>
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
