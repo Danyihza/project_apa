@@ -39,7 +39,7 @@
 </div>
 
 <?php 
-if ($User) {
+if (isset($User)) {
 foreach ($User as $u) : ?>
   <!-- Status Modal -->
   <div class="modal fade" id="statusModal<?= $u['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
