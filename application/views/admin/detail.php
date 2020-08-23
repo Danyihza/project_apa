@@ -23,7 +23,7 @@
                         <tr>
                             <td class="text-center">
                                 <?php if ($u['is_active'] == 1) : ?>
-                                    <a class="btn btn-danger" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Eliminasi</a>
+                                    <a class="btn btn-danger" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Tidak Lolos</a>
                                 <?php else : ?>
                                     <a class="btn btn-success" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Lolos</a>
                                 <?php endif; ?>
