@@ -14,10 +14,53 @@ class Admin extends CI_Controller
         $data['title'] = 'Dashboard';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-        
+
         // $query = $this->db->query("SELECT * FROM user WHERE pilihan1='Ketua MPK' OR pilihan2='Ketua MPK'");
         // $data['ketum'] = $query->num_rows();
         $this->load->model('Jabatan_model', 'jabatan');
+
+        $data['jabmpk'] = $this->jabatan->getAllJabatan();
+        // var_dump($data['mpk']);die;
+
+        $data['mpk'] = [
+            $this->jabatan->getjabatan(1),
+            $this->jabatan->getjabatan(2),
+            $this->jabatan->getjabatan(3),
+            $this->jabatan->getjabatan(4),
+            $this->jabatan->getjabatan(5),
+            $this->jabatan->getjabatan(6),
+            $this->jabatan->getjabatan(7),
+            $this->jabatan->getjabatan(8),
+            $this->jabatan->getjabatan(9),
+            $this->jabatan->getjabatan(10),
+            $this->jabatan->getjabatan(11),
+            $this->jabatan->getjabatan(12),
+            $this->jabatan->getjabatan(13),
+            $this->jabatan->getjabatan(14),
+            $this->jabatan->getjabatan(15),
+            $this->jabatan->getjabatan(16),
+            $this->jabatan->getjabatan(17),
+            $this->jabatan->getjabatan(18),
+            $this->jabatan->getjabatan(19),
+            $this->jabatan->getjabatan(20)
+        ];
+
+        // $data['osis'] = [
+        //     'ketos' => $this->jabatan->getjabatan(7),
+        //     'waketos' => $this->jabatan->getjabatan(8),
+        //     'sekos' => $this->jabatan->getjabatan(9),
+        //     'benos' => $this->jabatan->getjabatan(10),
+        //     'sek1' => $this->jabatan->getjabatan(11),
+        //     'sek2' => $this->jabatan->getjabatan(12),
+        //     'sek3' => $this->jabatan->getjabatan(13),
+        //     'sek4' => $this->jabatan->getjabatan(14),
+        //     'sek5' => $this->jabatan->getjabatan(15),
+        //     'sek6' => $this->jabatan->getjabatan(16),
+        //     'sek7' => $this->jabatan->getjabatan(17),
+        //     'sek8' => $this->jabatan->getjabatan(18),
+        //     'sek9' => $this->jabatan->getjabatan(19),
+        //     'sek10' => $this->jabatan->getjabatan(20)
+        // ];
 
         $data['ketum'] = $this->jabatan->getjabatan(1);
         $data['waketum'] = $this->jabatan->getjabatan(2);
@@ -40,7 +83,7 @@ class Admin extends CI_Controller
         $data['sek9'] = $this->jabatan->getjabatan(19);
         $data['sek10'] = $this->jabatan->getjabatan(20);
 
-            
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -54,7 +97,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Detail User';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-        $this->db->order_by('name', 'asc');
+        // $this->db->order_by('name', 'asc');
         $data['User'] = $this->db->get_where('user', ['role_id' => 2])->result_array();
 
 
@@ -63,6 +106,41 @@ class Admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function org($id)
+    {
+        $res = $this->db->get_where('jabatan', ['id_jabatan' => $id])->row_array();
+        $data['title'] = $res['jabatan'];
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        // $this->db->order_by('name', 'asc');
+        $query = "SELECT * FROM user WHERE role_id='2' AND pilihan1='$id' OR pilihan2='$id'";
+        $result = $this->db->query($query);
+        $data['User'] = $result->result_array();
+        // $data['User'] = $this->db->get_where('user', ['role_id' => 2])->result_array();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function changeStatus($id)
+    {
+        $this->load->library('user_agent');
+        $rs = $this->db->get_where('user', ['id' => $id])->row_array();
+        if ($rs['is_active'] == 1) {
+            $this->db->where('id', $id);
+            $this->db->update('user', ['is_active' => 2]);
+            redirect($this->agent->referrer());
+        } else {
+            $this->db->where('id', $id);
+            $this->db->update('user', ['is_active' => 1]);
+            redirect($this->agent->referrer());
+        }
     }
 
     public function delete($id)
@@ -77,8 +155,6 @@ class Admin extends CI_Controller
 
     public function edit($id)
     {
-        
-
     }
 
     public function role()

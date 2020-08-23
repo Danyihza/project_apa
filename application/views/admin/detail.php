@@ -6,31 +6,57 @@
 
             <!-- Table of user -->
             <?= $this->session->flashdata('message'); ?>
-            <table class="table table-hover">
+            <table class="table table-hover" id="myTable">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Keterangan</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Kelas</th>
+                        <th scope="col">Pilihan 1</th>
+                        <th scope="col">Pilihan 2</th>
                         <th scope="col">Foto</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Detail</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
                     <?php foreach ($User as $u) : ?>
                         <tr>
-                            <th scope="row"><?php echo $i ?></th>
-                            <td><?= $u['name']; ?></td>
-                            <td><?= $u['email']; ?></td>
-                            <td><img src="<?= base_url('assets/img/profile/' . $u['image']); ?>" width="64"></td>
-                            <td>
-                                <a class="badge badge-success" href="#" data-target="#ModalEdit" data-toggle="modal">Edit</a>
-                                <!-- <a type="button" class="badge badge-warning" href="#" data-target="#ModalEdit" data-toggle="modal">Edit</a> -->
-                                <a class="badge badge-danger" href="<?= base_url('admin/delete/') . $u['id'] ?>" onclick="confirm('Apakah anda yakin menghapusnya ?')">Delete</a>
+                            <td class="text-center">
+                                <?php if ($u['is_active'] == 1) : ?>
+                                    <a class="btn btn-success" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Lolos</a>
+                                <?php else : ?>
+                                    <a class="btn btn-danger" href="#" data-target="#statusModal<?= $u['id'] ?>" data-toggle="modal">Eliminasi</a>
+                                <?php endif; ?>
                             </td>
+                            <td><?= $u['name']; ?></td>
+                            <td><?= $u['kelas']; ?></td>
+                            <td><?php
+
+                                $rs = $this->db->get_where('jabatan', ['id_jabatan' => $u['pilihan1']])->row_array();
+                                $sub = '';
+
+                                if ($u['sub_jabatan1'] > 0) {
+                                    $r = $this->db->get_where('sub_jabatan', ['id_sub' => $u['sub_jabatan1']])->row_array();
+                                    $sub = $r['sub_jabatan'] . "&nbsp;";
+                                }
+                                echo $sub . $rs['jabatan'];
+
+                                ?></td>
+                            <td><?php
+
+                                $rs = $this->db->get_where('jabatan', ['id_jabatan' => $u['pilihan2']])->row_array();
+                                $sub = '';
+
+                                if ($u['sub_jabatan2'] > 0) {
+                                    $r = $this->db->get_where('sub_jabatan', ['id_sub' => $u['sub_jabatan2']])->row_array();
+                                    $sub = $r['sub_jabatan'] . "&nbsp;";
+                                }
+                                echo $sub . $rs['jabatan'];
+
+                                ?></td>
+                            <td><img src="<?= base_url('assets/img/foto_peserta/' . $u['image']); ?>" width="92"></td>
+                            <td><a class="badge badge-warning" href="#" data-target="#modalDetail<?= $u['id'] ?>" data-toggle="modal">Detail</a></td>
                         </tr>
-                        <?php $i++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -44,33 +70,71 @@
         </div>
         <!-- End of Main Content -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="ModalEdit" name="ModalEdit" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newRoleModalLabel">Add New Role</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?php echo base_url('admin/role'); ?>" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="role" name="role" placeholder="Role Name">
-                                <input type="text" class="form-control" id="role" name="role" placeholder="Email" readonly>
-                            </div>
-                                
+        <?php foreach ($User as $u) : ?>
+            <!-- Detail Modal -->
+            <div class="modal fade" id="modalDetail<?= $u['id'] ?>" name="ModalEdit" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="newRoleModalLabel">Add New Role</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="<?= base_url('assets/img/foto_peserta/') . $u['image'] ?>" class="card-img mb-3" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <?php
+                                            $sub1 = '';
+                                            $sub2 = '';
 
+                                            $rs = $this->db->get_where('jabatan', ['id_jabatan' => $u['pilihan1']]);
+                                            $pil1 = $rs->row_array();
+
+                                            if ($u['sub_jabatan1'] > 0) {
+                                                $query = $this->db->get_where('sub_jabatan', ['id_sub' => $u['sub_jabatan1']])->row_array();
+                                                $sub1 = $query['sub_jabatan'] . "&nbsp;";
+                                            }
+
+                                            $res = $this->db->get_where('jabatan', ['id_jabatan' => $u['pilihan2']]);
+                                            $pil2 = $res->row_array();
+
+                                            if ($u['sub_jabatan2'] > 0) {
+                                                $query = $this->db->get_where('sub_jabatan', ['id_sub' => $u['sub_jabatan2']])->row_array();
+                                                $sub2 = $query['sub_jabatan'] . "&nbsp;";
+                                            }
+                                            ?>
+                                            <li class="list-group-item">Nama : <?= $u['name']; ?></li>
+                                            <li class="list-group-item">Kelas : <?= $u['kelas']; ?></li>
+                                            <li class="list-group-item">Tempat Tanggal Lahir : <?= $u['ttl']; ?></li>
+                                            <li class="list-group-item">Alamat : <?= $u['alamat']; ?></li>
+                                            <li class="list-group-item">No Hp : <?= $u['no_hp']; ?></li>
+                                            <li class="list-group-item">Email : <?= $u['email']; ?></li>
+                                            <li class="list-group-item">Pekerjaan Ortu : <?= $u['p_ortu']; ?></li>
+                                            <li class="list-group-item">No Ortu : <?= $u['no_ortu']; ?></li>
+                                            <li class="list-group-item">Pengalaman ORG : <?= $u['pengalaman']; ?></li>
+                                            <li class="list-group-item">Prestasi : <?= $u['prestasi']; ?></li>
+                                            <li class="list-group-item">Pilihan 1 : <?= $sub1 . $pil1['jabatan'] ?></li>
+                                            <li class="list-group-item">Pilihan 2 : <?= $sub2 . $pil2['jabatan'] ?></li>
+                                            <li class="list-group-item">Kode Unik : <p class="badge badge-info mb-0"><?= $u['unique_code'] ?></p>
+                                            </li>
+                                            <?php if ($u['is_active'] == 1) : ?>
+                                                <li class="list-group-item list-group-item-success">Keterangan : <b>Lolos</b></li>
+                                                <?php elseif ($u['is_active'] == 2) : ?>
+                                                    <li class="list-group-item list-group-item-danger">Keterangan : <b>Tidak Lolos</b></li>
+                                                    <?php endif; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- End Of Modal -->
-
-        
+            <!-- End Of Modal -->
+        <?php endforeach; ?>
