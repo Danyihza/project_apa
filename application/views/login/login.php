@@ -67,7 +67,7 @@
 							Login
 						</button>
 					</div>
-					<a href="<?= base_url('auth/registration'); ?>" class="login100-form-btn mb-3 mt-3">Daftar</a>
+					<!-- <a href="<?= base_url('auth/registration'); ?>" class="login100-form-btn mb-3 mt-3">Daftar</a> -->
 
 
 					<div class=" p-t-46 p-b-20">

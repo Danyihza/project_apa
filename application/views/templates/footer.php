@@ -38,28 +38,28 @@
   </div>
 </div>
 
-<?php 
+<?php
 if (isset($User)) {
-foreach ($User as $u) : ?>
-  <!-- Status Modal -->
-  <div class="modal fade" id="statusModal<?= $u['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Apakah Anda Yakin Mengubah Status Peserta ini ?</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-          <a class="btn btn-primary" href="<?= base_url('admin/changeStatus/') . $u['id'] ?>">Yakin</a>
+  foreach ($User as $u) : ?>
+    <!-- Status Modal -->
+    <div class="modal fade" id="statusModal<?= $u['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Apakah Anda Yakin Mengubah Status Peserta ini ?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+            <a class="btn btn-primary" href="<?= base_url('admin/changeStatus/') . $u['id'] ?>">Yakin</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<?php endforeach; 
+<?php endforeach;
 }
 ?>
 
@@ -78,11 +78,26 @@ foreach ($User as $u) : ?>
 <!-- JS DataTables -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script>
   $(document).ready(function() {
     $('#myTable').DataTable();
   });
 </script>
+
+<?php if ($this->session->flashdata('delete')) : ?>
+  <script>
+    $(document).ready(function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Data <?= $this->session->flashdata('delete') ?> berhasil dihapus'
+      })
+    })
+  </script>
+<?php endif; ?>
 
 
 <script>

@@ -145,12 +145,15 @@ class Admin extends CI_Controller
 
     public function delete($id)
     {
-        # code...
-        $this->db->where('id', $id);
-        $this->db->delete('user');
+        $this->load->library('user_agent');
+        // $this->db->where('id', $id);
+        // $this->db->delete('user');
 
-        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Data has been deleted</div>');
-        redirect('admin/detail');
+        $rs = $this->db->get_where('user', ['id' => $id])->row_array();
+        $name = $rs['name'];
+        var_dump($name); die;
+        $this->session->set_flashdata('delete', $name);
+        redirect($this->agent->referrer());
     }
 
     public function edit($id)

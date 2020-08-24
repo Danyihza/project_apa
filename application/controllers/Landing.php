@@ -6,16 +6,30 @@ class Landing extends CI_Controller
 
     public function index()
     {
-        // $this->db->select('*');
-        // $this->db->from('user');
-        // $this->db->join('jabatan', 'user.pilihan1 = jabatan.id_jabatan AND user.pilihan2 = jabatan.id_jabatan');
-        // $this->db->join('sub_jabatan', 'user.sub_jabatan1 = sub_jabatan.id_sub AND user.sub_jabatan2 = sub_jabatan.id_sub');
+        if (!$this->session->userdata('email')) {
+            redirect(base_url());
+        }
         $data['user'] = $this->db->get_where('user', ['user.email' => $this->session->userdata('email')])->row_array();
-        // var_dump($data['user']);die;
+        $this->load->view('landing/landing', $data);
+    }
+    
+    public function editData()
+    {
+        if (!$this->session->userdata('email')) {
+            redirect(base_url());
+        }
+        $data['user'] = $this->db->get_where('user', ['user.email' => $this->session->userdata('email')])->row_array();
         $data['title'] = '9G User Validation';
         $this->load->view('templates/validation_header', $data);
         $this->load->view('validation/validation', $data);
         $this->load->view('templates/validation_footer');
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+
+        redirect(base_url());
     }
 
     public function update()

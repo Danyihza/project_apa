@@ -15,7 +15,7 @@
                         <th scope="col">Pilihan 1</th>
                         <th scope="col">Pilihan 2</th>
                         <th scope="col">Foto</th>
-                        <th scope="col">Detail</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +55,10 @@
 
                                 ?></td>
                             <td><img src="<?= base_url('assets/img/foto_peserta/' . $u['image']); ?>" width="92"></td>
-                            <td><a class="badge badge-warning" href="#" data-target="#modalDetail<?= $u['id'] ?>" data-toggle="modal">Detail</a></td>
+                            <td>
+                                <a class="badge badge-warning" href="#" data-target="#modalDetail<?= $u['id'] ?>" data-toggle="modal">Detail</a>
+                                <a class="badge badge-danger" href="<?= base_url('admin/delete/') . $u['id'] ?>" onclick="return confirm('Apakah Anda Yakin Menghapus data ini ? Data yang dihapus akan hilang permanen')">Hapus</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

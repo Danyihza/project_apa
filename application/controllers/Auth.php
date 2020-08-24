@@ -105,7 +105,7 @@ class Auth extends CI_Controller
 
 
 
-    public function registration()
+    /*public function registration()
     {
 
         // if ($this->session->userdata('email')) {
@@ -196,7 +196,7 @@ class Auth extends CI_Controller
             Congratulations! your account has been created. Please Login</div>');
             redirect(base_url());
         }
-    }
+    }*/
 
     function generateRandomString($length = 6)
     {
