@@ -67,7 +67,7 @@
 							Login
 						</button>
 					</div>
-					<!-- <a href="<?= base_url('auth/registration'); ?>" class="login100-form-btn mb-3 mt-3">Daftar</a> -->
+					<a href="<?= base_url('auth/registration'); ?>" class="login100-form-btn mb-3 mt-3">Daftar</a>
 
 
 					<div class=" p-t-46 p-b-20">
@@ -76,7 +76,8 @@
 							<hr>
 							<ol>
 								<li>
-									<p class="mb-1">Untuk Semua Pendaftar Harap Login Untuk Mengecek Kolom Pengalaman Organisasi & Prestasi, Jika Belum Terisi Maka Isi Kembali</p>
+									<p class="mb-1">- Untuk Semua Pendaftar Harap Login Untuk Mengecek Kolom Pengalaman Organisasi & Prestasi, Jika Belum Terisi Maka Isi Kembali</p>
+									<p class="mb-1">- Tes Tulis dibuka pada Selasa 25 Agustus 2020 pukul 08.00 s/d 10.00 WIB</p>
 								</li>
 							</ol>
 						</div>

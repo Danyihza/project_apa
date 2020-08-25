@@ -65,8 +65,8 @@
                         <div class="banner_text_iner">
                             <h5>Are You Ready ?</h5>
                             <h1>Tes Tahap 1 : Tes Tulis</h1>
-                            <p>Klik tombol Lihat Kode Tes untuk melihat kode unik, Tes Tulis akan dibuka pada Hari Selasa 25 Agustus 2020 pukul 08.00 - 10.00 WIB</p>
-                            <?php if (time() >= 1598317200 && time() <= 1598324400) : ?>
+                            <p>Klik tombol Lihat Kode Tes untuk melihat kode unik, Tes Tulis akan dibuka pada Hari Selasa 25 Agustus 2020 pukul 08.00 - 10.00 WIB </p>
+                            <?php if (time() >= 1598284006 && time() <= 1598324400) : ?>
                                 <a href="https://forms.gle/V4hpx5KLM2NHKsc69" target="_blank" class="btn_1">Lakukan Tes</a>
                             <?php endif; ?>
                             <a href="#" class="btn_2" data-toggle="modal" data-target="#exampleModal">Lihat Kode Tes</a>
